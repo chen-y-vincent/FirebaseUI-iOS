@@ -105,7 +105,7 @@ static const CGFloat kFontSize = 12.0f;
   return [self initWithFrame:frame
                        image:providerUI.icon
                         text:providerUI.signInLabel
-             backgroundColor:providerUI.buttonBackgroundColor
+             backgroundColor:UIColor.orangeColor //providerUI.buttonBackgroundColor
                    textColor:providerUI.buttonTextColor
              buttonAlignment:providerUI.buttonAlignment];
 }
