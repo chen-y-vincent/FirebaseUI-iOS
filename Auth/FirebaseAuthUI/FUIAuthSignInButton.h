@@ -54,14 +54,18 @@ NS_ASSUME_NONNULL_BEGIN
                text:(NSString *)text
     backgroundColor:(UIColor *)backgroundColor
           textColor:(UIColor *)textColor
-    buttonAlignment:(FUIButtonAlignment)buttonAlignment NS_DESIGNATED_INITIALIZER;
+    buttonAlignment:(FUIButtonAlignment)buttonAlignment
+  buttonBorderColor:(UIColor *)buttonBorderColor NS_DESIGNATED_INITIALIZER;
 
 /** @fn initWithFrame:providerUI:
     @brief Convenience initalizer.
     @param frame The initial frame for the button.
     @param providerUI The provider UI instance associated with this button.
+    @param overwriteWithSignUpText Show sign up text instead of sign in text
  */
-- (id)initWithFrame:(CGRect)frame providerUI:(id<FUIAuthProvider>)providerUI;
+- (id)initWithFrame:(CGRect)frame
+         providerUI:(id<FUIAuthProvider>)providerUI
+overwriteWithSignUpText:(BOOL)overwriteWithSignUpText;
 
 @end
 

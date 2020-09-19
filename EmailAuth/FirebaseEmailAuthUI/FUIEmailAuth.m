@@ -147,12 +147,17 @@ static NSString *const kEmailLinkSignInLinkingCredentialKey = @"FIRAuthEmailLink
   return FUILocalizedString(kStr_SignInWithEmail);
 }
 
+- (NSString *)signUpLabel {
+  // TODO: localize
+  return @"Sign Up With email";
+}
+
 - (UIImage *)icon {
   return [FUIAuthUtils imageNamed:@"ic_email" fromBundleNameOrNil:FUIEmailAuthBundleName];
 }
 
 - (UIColor *)buttonBackgroundColor {
-  return [UIColor colorWithRed:208.f/255.f green:2.f/255.f blue:27.f/255.f alpha:1.0];
+  return [UIColor colorWithRed:74.f/255.f green:194.f/255.f blue:255.f/255.f alpha:1.0];
 }
 
 - (UIColor *)buttonTextColor {

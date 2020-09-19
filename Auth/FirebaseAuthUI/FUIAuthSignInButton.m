@@ -21,30 +21,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/** @var kCornerRadius
-    @brief Corner radius of the button.
- */
-static const int kCornerRadius = 2.0f;
-
-/** @var kDropShadowAlpha
-    @brief Opacity of the drop shadow of the button.
- */
-static const CGFloat kDropShadowAlpha = 0.24f;
-
-/** @var kDropShadowRadius
-    @brief Radius of the drop shadow of the button.
- */
-static const CGFloat kDropShadowRadius = 2.0f;
-
-/** @var kDropShadowYOffset
-    @brief Vertical offset of the drop shadow of the button.
- */
-static const CGFloat kDropShadowYOffset = 2.0f;
-
-/** @var kFontSize
-    @brief Button text font size.
- */
-static const CGFloat kFontSize = 12.0f;
+//static const CGFloat kButtonHeight = 48.0f;
+static const CGFloat kFontSize = 16.0f;
 
 @implementation FUIAuthSignInButton
 
@@ -53,17 +31,25 @@ static const CGFloat kFontSize = 12.0f;
                          text:(NSString *)text
               backgroundColor:(UIColor *)backgroundColor
                     textColor:(UIColor *)textColor
-              buttonAlignment:(FUIButtonAlignment)buttonAlignment {
+              buttonAlignment:(FUIButtonAlignment)buttonAlignment
+            buttonBorderColor:(UIColor *)buttonBorderColor {
   self = [super initWithFrame:frame];
   if (!self) {
     return nil;
   }
 
   self.backgroundColor = backgroundColor;
+  
   [self setTitle:text forState:UIControlStateNormal];
   [self setTitleColor:textColor forState:UIControlStateNormal];
-  self.titleLabel.font = [UIFont boldSystemFontOfSize:kFontSize];
-  self.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+  
+  if (@available(iOS 8.2, *)) {
+    self.titleLabel.font = [UIFont systemFontOfSize:kFontSize weight:UIFontWeightMedium];
+  } else {
+    // Fallback on earlier versions
+    self.titleLabel.font = [UIFont boldSystemFontOfSize:kFontSize];
+  }
+  
   [self setImage:image forState:UIControlStateNormal];
 
   CGFloat paddingTitle = 8.0f;
@@ -84,30 +70,35 @@ static const CGFloat kFontSize = 12.0f;
     [self setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
   }
   
+  self.layer.cornerRadius = frame.size.height / 2.0;
   
+  if (buttonBorderColor != nil) {
+    self.layer.borderWidth = 1.0;
+    self.layer.borderColor = buttonBorderColor.CGColor;
+  }
   
-  self.layer.cornerRadius = kCornerRadius;
-
-  // Add a drop shadow.
-  self.layer.masksToBounds = NO;
-  self.layer.shadowColor = [UIColor blackColor].CGColor;
-  self.layer.shadowOpacity = kDropShadowAlpha;
-  self.layer.shadowRadius = kDropShadowRadius;
-  self.layer.shadowOffset = CGSizeMake(0, kDropShadowYOffset);
-
   self.adjustsImageWhenHighlighted = NO;
 
   return self;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame providerUI:(id<FUIAuthProvider>)providerUI {
+- (instancetype)initWithFrame:(CGRect)frame
+                   providerUI:(id<FUIAuthProvider>)providerUI
+      overwriteWithSignUpText:(BOOL)overwriteWithSignUpText {
   _providerUI = providerUI;
+  
+  UIColor *buttonBorderColor = nil;
+  if ([providerUI respondsToSelector:@selector(buttonBorderColor)]) {
+    buttonBorderColor = [providerUI buttonBorderColor];
+  }
+  
   return [self initWithFrame:frame
                        image:providerUI.icon
-                        text:providerUI.signInLabel
-             backgroundColor:UIColor.orangeColor //providerUI.buttonBackgroundColor
+                        text:overwriteWithSignUpText ? providerUI.signUpLabel : providerUI.signInLabel
+             backgroundColor:providerUI.buttonBackgroundColor
                    textColor:providerUI.buttonTextColor
-             buttonAlignment:providerUI.buttonAlignment];
+             buttonAlignment:FUIButtonAlignmentCenter
+           buttonBorderColor:buttonBorderColor];
 }
 
 @end

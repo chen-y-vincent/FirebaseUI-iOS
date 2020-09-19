@@ -64,6 +64,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic, copy) NSString *signInLabel;
 
+@property(nonatomic, copy) NSString *signUpLabel;
+
 /** @property shortName
     @brief A short display name for the provider.
  */
@@ -110,7 +112,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI
                     providerID:(NSString *)providerID
-               buttonLabelText:(NSString *)buttonLabelText
+                    signInText:(NSString *)signInText
+                    signUpText:(NSString *)signUpText
                      shortName:(NSString *)shortName
                    buttonColor:(UIColor *)buttonColor
                      iconImage:(UIImage *)iconImage
@@ -120,7 +123,8 @@ NS_ASSUME_NONNULL_BEGIN
   if (self = [super init]) {
     _authUI = authUI;
     _providerID = providerID;
-    _signInLabel = buttonLabelText;
+    _signInLabel = signInText;
+    _signUpLabel = signUpText;
     _shortName = shortName;
     _buttonBackgroundColor = buttonColor;
     _buttonTextColor = [UIColor whiteColor];
@@ -138,7 +142,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (FUIOAuth *)twitterAuthProvider {
   return [[FUIOAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
                                providerID:@"twitter.com"
-                          buttonLabelText:@"Sign in with Twitter"
+                               signInText:@"Sign in with Twitter"
+                               signUpText:@"Sign up with Twitter"
                                 shortName:@"Twitter"
                               buttonColor:[UIColor colorWithRed:71.0f/255.0f
                                                           green:154.0f/255.0f
@@ -154,7 +159,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (FUIOAuth *)githubAuthProvider {
   return [[FUIOAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
                                providerID:@"github.com"
-                          buttonLabelText:@"Sign in with GitHub"
+                               signInText:@"Sign in with GitHub"
+                               signUpText:@"Sign up with GitHub"
                                 shortName:@"GitHub"
                               buttonColor:[UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1.0]
                                 iconImage:[FUIAuthUtils imageNamed:@"ic_github"
@@ -167,7 +173,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (FUIOAuth *)microsoftAuthProvider {
   return [[FUIOAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
                                providerID:@"microsoft.com"
-                          buttonLabelText:@"Sign in with Microsoft"
+                               signInText:@"Sign in with Microsoft"
+                               signUpText:@"Sign up with Microsoft"
                                 shortName:@"Microsoft"
                               buttonColor:[UIColor colorWithRed:.18 green:.18 blue:.18 alpha:1.0]
                                 iconImage:[FUIAuthUtils imageNamed:@"ic_microsoft"
@@ -180,7 +187,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (FUIOAuth *)yahooAuthProvider {
   return [[FUIOAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
                                providerID:@"yahoo.com"
-                          buttonLabelText:@"Sign in with Yahoo"
+                               signInText:@"Sign in with Yahoo"
+                               signUpText:@"Sign up with Yahoo"
                                 shortName:@"Yahoo"
                               buttonColor:[UIColor colorWithRed:.45 green:.05 blue:.62 alpha:1.0]
                                 iconImage:[FUIAuthUtils imageNamed:@"ic_yahoo"
@@ -195,14 +203,19 @@ NS_ASSUME_NONNULL_BEGIN
                             fromBundleNameOrNil:@"FirebaseOAuthUI"];
   UIColor *buttonColor = [UIColor blackColor];
   UIColor *buttonTextColor = [UIColor whiteColor];
-  if (UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
-    iconImage = [iconImage imageWithTintColor:[UIColor blackColor]];
-    buttonColor = [UIColor whiteColor];
-    buttonTextColor = [UIColor blackColor];
-  }
+  
+  // TODO: do something different for light mode vs dark mode
+//  if (UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
+//    iconImage = [iconImage imageWithTintColor:[UIColor blackColor]];
+//    buttonColor = [UIColor whiteColor];
+//    buttonTextColor = [UIColor blackColor];
+//  }
+  
   FUIOAuth *provider = [[FUIOAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
                                              providerID:@"apple.com"
-                                        buttonLabelText:@"Sign in with Apple"
+                                             // TODO: Localize strings
+                                             signInText:@"Sign in with Apple"
+                                             signUpText:@"Sign up with Apple"
                                               shortName:@"Apple"
                                             buttonColor:buttonColor
                                               iconImage:iconImage

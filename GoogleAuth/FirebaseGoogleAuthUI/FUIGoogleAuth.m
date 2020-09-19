@@ -96,6 +96,11 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
   return FUILocalizedStringFromTableInBundle(kSignInWithGoogle, kTableName, kBundleName);
 }
 
+- (NSString *)signUpLabel {
+  // TODO: localize
+  return @"Sign Up With Google";
+}
+
 - (UIImage *)icon {
   return [FUIAuthUtils imageNamed:@"ic_google" fromBundleNameOrNil:kBundleName];
 }
@@ -106,6 +111,13 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
 
 - (UIColor *)buttonTextColor {
   return [UIColor colorWithWhite:0 alpha:0.54f];
+}
+
+- (UIColor *)buttonBorderColor {
+  return [UIColor colorWithRed:90.0f/255.0f
+                         green:88.0f/255.0f
+                          blue:87.0f/255.0f
+                         alpha:1.0];
 }
 
 #pragma clang diagnostic push

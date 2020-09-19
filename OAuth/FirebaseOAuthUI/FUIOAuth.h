@@ -57,7 +57,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI
                     providerID:(NSString *)providerID
-               buttonLabelText:(NSString *)buttonLabelText
+                    signInText:(NSString *)signInText
+                    signUpText:(NSString *)signUpText
                      shortName:(NSString *)shortName
                    buttonColor:(UIColor *)buttonColor
                      iconImage:(UIImage *)iconImage

@@ -87,6 +87,8 @@ static FUIAuthProviderSignInUserInfoKey FUIAuthProviderSignInUserInfoKeyAuthData
  */
 @property(nonatomic, copy, readonly) NSString *signInLabel;
 
+@property(nonatomic, copy, readonly) NSString *signUpLabel;
+
 /** @property icon
     @brief The icon image of the provider.
  */
@@ -172,6 +174,9 @@ __attribute__((deprecated("This is deprecated API and will be removed in a futur
     @return YES if your auth provider handled the URL. NO otherwise.
  */
 - (BOOL)handleOpenURL:(NSURL *)URL sourceApplication:(nullable NSString *)sourceApplication;
+
+// Optional method, we only add border if this is not nil
+- (UIColor *)buttonBorderColor;
 
 @end
 

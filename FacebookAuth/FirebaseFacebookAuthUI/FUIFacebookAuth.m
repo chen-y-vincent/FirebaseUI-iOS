@@ -107,6 +107,11 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
   return FUILocalizedStringFromTableInBundle(kSignInWithFacebook, kTableName, kBundleName);
 }
 
+- (NSString *)signUpLabel {
+  // TODO: localize
+  return @"Sign Up With Facebook";
+}
+
 - (UIImage *)icon {
   return [FUIAuthUtils imageNamed:@"ic_facebook" fromBundleNameOrNil:kBundleName];
 }

@@ -20,10 +20,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSInteger, FUIAuthPickerViewType) {
+  FUIAuthPickerViewTypeSignUp,
+  FUIAuthPickerViewTypeSignIn
+};
+
 /** @class FUIAuthPickerViewController
     @brief The view controller that displays sign in options to the user.
  */
 @interface FUIAuthPickerViewController : FUIAuthBaseViewController
+
+@property (nonatomic, readonly) FUIAuthPickerViewType authPickerViewType;
 
 @end
 

@@ -78,7 +78,7 @@ static NSString *const kAuthUICodingKey = @"authUI";
     _auth = authUI.auth;
     _authUI = authUI;
 
-    _activityIndicator = [[self class] addActivityIndicator:self.view];
+//    _activityIndicator = [[self class] addActivityIndicator:self.view];
   }
   return self;
 }
